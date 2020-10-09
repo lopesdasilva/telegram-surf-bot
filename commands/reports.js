@@ -2,8 +2,33 @@ const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 const { Markup } = require('telegraf');
 
+const { REPORTS, almada } = require('../constants');
 
-const { REPORTS, spots } = require('../constants');
+const { spots } = almada.almada;
+
+function getDayForecast($, number) {
+  const date = $(`#dayweek_${number}_top .date`)[0].children[0].data.trim();
+  const weatherTemperature = $(`#dayweek_${number}_top .temperature`)[0].children[0].data.trim();
+  const weather = $(`#dayweek_${number}_top .summary`)[0].children[0].data.trim();
+  const waveHeight = $(`#dayweek_${number} .values`)[0].children[0].data.trim();
+  const wavePeriod = $(`#dayweek_${number} .values`)[3].children[0].data.trim();
+  const waveDirection = $(`#dayweek_${number} .values`)[1].children[0].data.trim();
+  const windSpeed = $(`#dayweek_${number} .values`)[5].children[0].data.trim();
+  const windDirection = $(`#dayweek_${number} .values`)[2].children[0].data.trim();
+
+  const seaTemperature = $(`#dayweek_${number} .values`)[4].children[0].data.trim();
+
+  return `*${date}: ${waveHeight}m* ${wavePeriod}s ${waveDirection} ${weather} ${weatherTemperature}ºC ${windDirection} ${windSpeed}km/h\n`;
+}
+
+function getForecast($) {
+  const day1 = getDayForecast($, 1);
+  const day2 = getDayForecast($, 2);
+  const day3 = getDayForecast($, 3);
+  const day4 = getDayForecast($, 4);
+
+  return `${day1}${day2}${day3}${day4}`;
+}
 
 const reportBeachCam = (resort, reply) => {
   const {
@@ -14,7 +39,6 @@ const reportBeachCam = (resort, reply) => {
     .then((response) => response.text())
     .then((html) => {
       const $ = cheerio.load(html);
-
 
       const seaTemperature = $('.suits .water span').text();
       const suitRecommendation = $('.infoSuit p').text();
@@ -31,6 +55,8 @@ const reportBeachCam = (resort, reply) => {
       const weatherUV = $('.weatherReport__content__item__info__text')[8].children[0].data.trim();
 
       const lastUpdateFormatted = $('.weatherReport__header__title').text();
+
+      const forecast = getForecast($);
 
       reply(`*Surf report state - ${resort.caption}*
 
@@ -52,9 +78,12 @@ const reportBeachCam = (resort, reply) => {
 *Weather Temperature:* ${weatherTemperature}
 *UV:* ${weatherUV}
 
+*📅Previsao:* 
+${forecast}
+
 ${lastUpdateFormatted}
 
-*Stream:* ${resort.stream}
+*🎥Stream:* ${resort.stream}
 `,
       { parse_mode: 'Markdown' });
     });
@@ -75,25 +104,13 @@ const replyOpenSlopes = (app, resort) => {
 };
 
 const reports = (app) => app.command(REPORTS, ({ reply }) => {
-  replyOpenSlopes(app, spots.cabanadopescador);
-  replyOpenSlopes(app, spots.saojoao);
-  replyOpenSlopes(app, spots.barbascds);
-  replyOpenSlopes(app, spots.marcelinocds);
-  replyOpenSlopes(app, spots.praianova);
-  replyOpenSlopes(app, spots.riviera);
-  replyOpenSlopes(app, spots.fontedatelha);
+  spots.forEach((spot) => replyOpenSlopes(app, spot));
+
+  const replies = spots.map((spot) => Markup.callbackButton(spot.caption,
+    spot.caption));
 
   return reply('Choose a spot:',
-    Markup.inlineKeyboard([
-      Markup.callbackButton(spots.cabanadopescador.caption,
-        spots.cabanadopescador.caption),
-      Markup.callbackButton(spots.saojoao.caption, spots.saojoao.caption),
-      Markup.callbackButton(spots.barbascds.caption, spots.barbascds.caption),
-      Markup.callbackButton(spots.marcelinocds.caption, spots.marcelinocds.caption),
-      Markup.callbackButton(spots.praianova.caption, spots.praianova.caption),
-      Markup.callbackButton(spots.riviera.caption, spots.riviera.caption),
-      Markup.callbackButton(spots.fontedatelha.caption, spots.fontedatelha.caption),
-    ], {
+    Markup.inlineKeyboard(replies, {
       columns: 2,
     }).oneTime().extra());
 });
