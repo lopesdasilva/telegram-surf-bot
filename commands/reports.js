@@ -93,8 +93,9 @@ const reports = (app) => app.command(REPORTS, ({ reply }) => {
       Markup.callbackButton(spots.praianova.caption, spots.praianova.caption),
       Markup.callbackButton(spots.riviera.caption, spots.riviera.caption),
       Markup.callbackButton(spots.fontedatelha.caption, spots.fontedatelha.caption),
-
-    ]).oneTime().extra());
+    ], {
+      columns: 2,
+    }).oneTime().extra());
 });
 
 module.exports = reports;
