@@ -30,6 +30,26 @@ function getForecast($) {
   return `${day1}${day2}${day3}${day4}`;
 }
 
+function getEmoji(color) {
+  switch (color) {
+    case 'green':
+      return '🟢';
+    case 'red':
+      return '🔴';
+    case 'yellow':
+      return '🟡';
+    default:
+      return undefined;
+  }
+}
+
+function getSemaphore(waveheightColor) {
+  const replace = 'weatherReport__content__item__info__circle weatherReport__content__item__info__circle--';
+  const replace1 = waveheightColor.replace(replace, '');
+
+  return getEmoji(replace1);
+}
+
 const reportBeachCam = (resort, reply) => {
   const {
     url,
@@ -40,51 +60,70 @@ const reportBeachCam = (resort, reply) => {
     .then((html) => {
       const $ = cheerio.load(html);
 
-      const seaTemperature = $('.suits .water span').text();
+      const weatherReportArray = $('.weatherReport__content__item__info__text');
+      const weatherReportArraySemaphore = $('.weatherReport__content__item__info__circle');
+
       const suitRecommendation = $('.infoSuit p').text();
 
-      const waveheight = $('.weatherReport__content__item__info__text')[1].children[0].data.trim();
-      const wavePeriod = $('.weatherReport__content__item__info__text')[2].children[0].data.trim();
-      const waveDirection = $('.weatherReport__content__item__info__text')[3].children[0].data.trim();
+      const seaTemperature = weatherReportArray[0].children[0].data.trim();
+      const seaTemperatureEmoji = getSemaphore(weatherReportArraySemaphore[0].attribs.class.trim());
 
-      const windDirection = $('.weatherReport__content__item__info__text')[4].children[0].data.trim();
-      const windSpeed = $('.weatherReport__content__item__info__text')[5].children[0].data.trim();
+      const waveheight = weatherReportArray[1].children[0].data.trim();
+      const waveheightEmoji = getSemaphore(weatherReportArraySemaphore[1].attribs.class.trim());
 
-      const weather = $('.weatherReport__content__item__info__text')[6].children[0].data.trim();
-      const weatherTemperature = $('.weatherReport__content__item__info__text')[7].children[0].data.trim();
-      const weatherUV = $('.weatherReport__content__item__info__text')[8].children[0].data.trim();
+      const wavePeriod = weatherReportArray[2].children[0].data.trim();
+      const wavePeriodEmoji = getSemaphore(weatherReportArraySemaphore[2].attribs.class.trim());
+
+      const waveDirection = weatherReportArray[3].children[0].data.trim();
+      const waveDirectionEmoji = getSemaphore(weatherReportArraySemaphore[3].attribs.class.trim());
+
+      const windDirection = weatherReportArray[4].children[0].data.trim();
+      const windDirectionEmoji = getSemaphore(weatherReportArraySemaphore[4].attribs.class.trim());
+
+      const windSpeed = weatherReportArray[5].children[0].data.trim();
+      const windSpeedEmoji = getSemaphore(weatherReportArraySemaphore[5].attribs.class.trim());
+
+      const weather = weatherReportArray[6].children[0].data.trim();
+      const weatherEmoji = getSemaphore(weatherReportArraySemaphore[6].attribs.class.trim());
+
+      const weatherTemperature = weatherReportArray[7].children[0].data.trim();
+      const weatherTemperatureEmoji = getSemaphore(weatherReportArraySemaphore[7]
+        .attribs.class.trim());
+
+      const weatherUV = weatherReportArray[8].children[0].data.trim();
+      const weatherUVEmoji = getSemaphore(weatherReportArraySemaphore[8].attribs.class.trim());
+
 
       const lastUpdateFormatted = $('.weatherReport__header__title').text();
 
       const forecast = getForecast($);
 
       reply(`*Surf report state - ${resort.caption}*
-
-*🌡️Water temperature:* ${seaTemperature}
-*🏄Suit recommendation:* ${suitRecommendation}
-
-*🌊SEA*
-*Sea temperature:* ${seaTemperature}
-*Wave height:* ${waveheight}m
-*Wave period:* ${wavePeriod}
-*Wave directions:* ${waveDirection}
-
-*🌬WIND*
-*Wind direction:* ${windDirection}
-*Wind speed:* ${windSpeed}
-
-*🏖️BEACH*
-*Weather:* ${weather}
-*Weather Temperature:* ${weatherTemperature}
-*UV:* ${weatherUV}
-
-*📅Previsao:* 
-${forecast}
-
-${lastUpdateFormatted}
-
-*🎥Stream:* ${resort.stream}
-`,
+            
+            *🏄Suit recommendation:* ${suitRecommendation}
+            
+            *🌊SEA*
+            *Sea temperature:* ${seaTemperature}ºC ${seaTemperatureEmoji}
+            *Wave height:* ${waveheight}m ${waveheightEmoji}
+            *Wave period:* ${wavePeriod} ${wavePeriodEmoji}
+            *Wave directions:* ${waveDirection} ${waveDirectionEmoji}
+            
+            *🌬WIND*
+            *Wind direction:* ${windDirection} ${windDirectionEmoji}
+            *Wind speed:* ${windSpeed}km/h ${windSpeedEmoji}
+            
+            *🏖️BEACH*
+            *Weather:* ${weather} ${weatherEmoji}
+            *Weather Temperature:* ${weatherTemperature}ºC ${weatherTemperatureEmoji}
+            *UV:* ${weatherUV} ${weatherUVEmoji}
+            
+            *📅Previsao:* 
+            ${forecast}
+            
+            ${lastUpdateFormatted}
+            
+            *🎥Stream:* ${resort.stream}
+            `,
       { parse_mode: 'Markdown' });
     });
 };
