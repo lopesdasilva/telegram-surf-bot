@@ -88,6 +88,36 @@ exports.beaches = {
           },
           stream: 'https://video-auth1.iol.pt/beachcam/carcavelos/playlist.m3u8',
         },
+        {
+          caption: 'Carcavelos Calhau',
+          lat: '47.4113',
+          long: '12.851',
+          map: 'https://media.skigebiete-test.de/images/ecu/entity/e_skiresort/ski-resort_schmittenhoehe_n3085-153507-1_raw.jpg',
+          reports: {
+            url: 'https://beachcam.meo.pt/livecams/carcavelos-calhau/',
+          },
+          stream: 'https://video-auth1.iol.pt/beachcam/carcavelos-calhau/playlist.m3u8',
+        },
+        {
+          caption: 'Parede',
+          lat: '47.4113',
+          long: '12.851',
+          map: 'https://media.skigebiete-test.de/images/ecu/entity/e_skiresort/ski-resort_schmittenhoehe_n3085-153507-1_raw.jpg',
+          reports: {
+            url: 'https://beachcam.meo.pt/livecams/parede/',
+          },
+          stream: 'https://video-auth1.iol.pt/beachcam/parede/playlist.m3u8',
+        },
+        {
+          caption: 'Praia da Avencas',
+          lat: '47.4113',
+          long: '12.851',
+          map: 'https://media.skigebiete-test.de/images/ecu/entity/e_skiresort/ski-resort_schmittenhoehe_n3085-153507-1_raw.jpg',
+          reports: {
+            url: 'https://beachcam.meo.pt/livecams/praia-das-avencas/',
+          },
+          stream: 'https://video-auth1.iol.pt/beachcam/praiadasavencas/playlist.m3u8',
+        },
       ],
     },
 
