@@ -2,9 +2,9 @@ const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 const { Markup } = require('telegraf');
 
-const { REPORTS, almada } = require('../constants');
+const { REPORTS, beaches } = require('../constants');
 
-const { spots } = almada.almada;
+const { areas } = beaches.beaches;
 
 function getDayForecast($, number) {
   const date = $(`#dayweek_${number}_top .date`)[0].children[0].data.trim();
@@ -135,23 +135,39 @@ const openSlopesHandler = (resort, reply) => {
   }
 };
 
-const replyOpenSlopes = (app, resort) => {
+const replySpot = (app, resort) => {
   app.action(resort.caption, async ({ editMessageText, reply }) => {
     editMessageText('Loading ...',
       await openSlopesHandler(resort, reply));
   });
 };
 
-const reports = (app) => app.command(REPORTS, ({ reply }) => {
-  spots.forEach((spot) => replyOpenSlopes(app, spot));
-
+const replyArea = (app, { caption, spots }) => {
+  spots.forEach((spot) => replySpot(app, spot));
   const replies = spots.map((spot) => Markup.callbackButton(spot.caption,
     spot.caption));
-
-  return reply('Choose a spot:',
+  app.action(caption, ({ reply }) => reply('Choose a spot:',
     Markup.inlineKeyboard(replies, {
       columns: 2,
-    }).oneTime().extra());
+    })
+      .removeKeyboard(true)
+      .oneTime()
+      .extra()));
+};
+
+const reports = (app) => app.command(REPORTS, ({ reply }) => {
+  areas.forEach((spot) => replyArea(app, spot));
+
+  const replies = areas.map((area) => Markup.callbackButton(area.caption,
+    area.caption));
+
+  return reply('Choose an Area:',
+    Markup.inlineKeyboard(replies, {
+      columns: 2,
+    })
+      .removeKeyboard(true)
+      .oneTime()
+      .extra());
 });
 
 module.exports = reports;
