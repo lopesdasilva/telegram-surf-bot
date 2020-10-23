@@ -2,6 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@3.0.0
 workflows:
+  version: 2
   nightly:
     triggers:
       - schedule:
@@ -10,6 +11,5 @@ workflows:
             branches:
               only:
                 - master
-  node-tests:
-    jobs:
-      - node/test
+  jobs:
+    - node/test
