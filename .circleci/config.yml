@@ -5,8 +5,7 @@ workflows:
   version: 2
   commit:
     jobs:
-      - test
-      - deploy
+      - node/test
   nightly:
     triggers:
       - schedule:
