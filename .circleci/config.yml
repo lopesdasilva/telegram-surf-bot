@@ -3,5 +3,13 @@ orbs:
   node: circleci/node@3.0.0
 workflows:
   node-tests:
+    nightly:
+      triggers:
+        - schedule:
+            cron: "0 0 * * *"
+            filters:
+              branches:
+                only:
+                  - master
     jobs:
       - node/test

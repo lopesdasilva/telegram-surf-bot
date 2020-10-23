@@ -1,5 +1,5 @@
-const { scrapeAndGetMarkup } = require('../scrapper/BeachCam');
-const { beaches } = require('../constants/spots');
+const { scrapeAndGetMarkup } = require('../../scrapper/BeachCam');
+const { beaches } = require('../../constants/spots');
 
 let weather;
 describe('BeachCam Scrapping', () => {
