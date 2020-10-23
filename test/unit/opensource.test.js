@@ -1,4 +1,4 @@
-const { opensource } = require('../commands');
+const { opensource } = require('../../commands');
 
 const bot = {
   command: jest.fn(),

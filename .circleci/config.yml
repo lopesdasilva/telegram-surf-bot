@@ -1,0 +1,19 @@
+version: 2.1
+orbs:
+  node: circleci/node@3.0.0
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - node/test
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+                - beta
+    jobs:
+      - node/test
