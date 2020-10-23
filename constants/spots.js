@@ -120,6 +120,50 @@ exports.beaches = {
         },
       ],
     },
-
+    {
+      caption: 'Sesimbra',
+      spots: [
+        {
+          caption: 'Praia de Sesimbra',
+          lat: '47.4113',
+          long: '12.851',
+          map: 'https://media.skigebiete-test.de/images/ecu/entity/e_skiresort/ski-resort_schmittenhoehe_n3085-153507-1_raw.jpg',
+          reports: {
+            url: 'https://beachcam.meo.pt/livecams/praia-sesimbra/',
+          },
+          stream: 'https://video-auth1.iol.pt/beachcam/sesimbra/playlist.m3u8',
+        },
+        {
+          caption: 'Bicas',
+          lat: '47.4113',
+          long: '12.851',
+          map: 'https://media.skigebiete-test.de/images/ecu/entity/e_skiresort/ski-resort_schmittenhoehe_n3085-153507-1_raw.jpg',
+          reports: {
+            url: 'https://beachcam.meo.pt/livecams/praia-das-bicas/',
+          },
+          stream: 'https://video-auth1.iol.pt/beachcam/bcpraiadasbicas/playlist.m3u8',
+        },
+        {
+          caption: 'Meco',
+          lat: '47.4113',
+          long: '12.851',
+          map: 'https://media.skigebiete-test.de/images/ecu/entity/e_skiresort/ski-resort_schmittenhoehe_n3085-153507-1_raw.jpg',
+          reports: {
+            url: 'https://beachcam.meo.pt/livecams/praia-do-meco/',
+          },
+          stream: 'https://video-auth1.iol.pt/beachcam/bcmeco/playlist.m3u8',
+        },
+        {
+          caption: 'Lagoa de Albufeira',
+          lat: '47.4113',
+          long: '12.851',
+          map: 'https://media.skigebiete-test.de/images/ecu/entity/e_skiresort/ski-resort_schmittenhoehe_n3085-153507-1_raw.jpg',
+          reports: {
+            url: 'https://beachcam.meo.pt/livecams/lagoa-de-albufeira/',
+          },
+          stream: ' https://video-auth1.iol.pt/beachcam/bclagoaalbufeira/playlist.m3u8',
+        },
+      ],
+    },
   ],
 };
