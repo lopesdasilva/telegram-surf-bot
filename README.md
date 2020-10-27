@@ -1,5 +1,7 @@
 # BeachCam Telegram bot
 
+[![lopesdasilva](https://circleci.com/gh/lopesdasilvatelegram-surf-bot.svg?style=svg)](https://app.circleci.com/pipelines/github/lopesdasilva/telegram-surf-bot)
+
 # Installation
 Dependencies:
 ```sh
