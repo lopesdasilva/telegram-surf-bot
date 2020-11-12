@@ -49,9 +49,6 @@ function getCurrentConditions($) {
   const weatherReportArray = $('.weatherReport__content__item__info__text');
   const weatherReportArraySemaphore = $('.weatherReport__content__item__info__circle');
 
-  const suitRecommendation = $('.infoSuit p')
-    .text();
-
   const seaTemperature = weatherReportArray[0].children[0].data.trim();
   const seaTemperatureEmoji = getSemaphore(weatherReportArraySemaphore[0].attribs.class.trim());
 
@@ -85,7 +82,6 @@ function getCurrentConditions($) {
     .text();
 
   return {
-    suitRecommendation,
     seaTemperature,
     seaTemperatureEmoji,
     waveHeight: waveheight,
@@ -112,7 +108,6 @@ function buildMarkup({ spot, current, forecast }) {
   const { caption, stream } = spot;
 
   const {
-    suitRecommendation,
     seaTemperature,
     seaTemperatureEmoji,
     waveHeight,
@@ -135,8 +130,6 @@ function buildMarkup({ spot, current, forecast }) {
   } = current;
 
   return `*Surf report state - ${caption}*
-            
-            *🏄Suit recommendation:* ${suitRecommendation}
             
             *🌊SEA*
             *Sea temperature:* ${seaTemperature}ºC ${seaTemperatureEmoji}
