@@ -8,6 +8,13 @@ const bot = new Telegraf(BOT_TOKEN);
 Object.values(commands).map((command) => command(bot));
 console.log(URL);
 console.log(PORT);
+
+
+bot.on('callback_query', async ({ update, deleteMessage }, next) => {
+  await deleteMessage(update.callback_query.message.message_id);
+  next();
+});
+
 if (URL) {
   bot.launch({
     webhook: {
