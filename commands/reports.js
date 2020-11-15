@@ -15,9 +15,10 @@ const openSlopesHandler = (resort, reply) => {
 };
 
 const replySpot = (app, resort) => {
-  app.action(resort.caption, async ({ editMessageText, reply }) => {
-    editMessageText('Loading ...',
-      await openSlopesHandler(resort, reply));
+  app.action(resort.caption, async ({ deleteMessage, reply }) => {
+    const loading = await reply('Loading ...');
+    await openSlopesHandler(resort, reply);
+    deleteMessage(loading.message_id);
   });
 };
 
