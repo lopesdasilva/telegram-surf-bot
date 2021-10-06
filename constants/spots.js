@@ -165,6 +165,40 @@ exports.beaches = {
         },
       ],
     },
-
+    {
+      caption: 'Algarve',
+      spots: [
+        {
+          caption: 'Odeceixe',
+          lat: '47.4113',
+          long: '12.851',
+          map: 'https://media.skigebiete-test.de/images/ecu/entity/e_skiresort/ski-resort_schmittenhoehe_n3085-153507-1_raw.jpg',
+          reports: {
+            url: 'https://beachcam.meo.pt/livecams/odeceixe/',
+          },
+          stream: '',
+        },
+        {
+          caption: 'Arrifana',
+          lat: '47.4113',
+          long: '12.851',
+          map: 'https://media.skigebiete-test.de/images/ecu/entity/e_skiresort/ski-resort_schmittenhoehe_n3085-153507-1_raw.jpg',
+          reports: {
+            url: 'https://beachcam.meo.pt/livecams/arrifana/',
+          },
+          stream: 'https://video-auth1.iol.pt/beachcam/arrifana/playlist.m3u8',
+        },
+        {
+          caption: 'Praia Verde | Castro Marim',
+          lat: '47.4113',
+          long: '12.851',
+          map: 'https://media.skigebiete-test.de/images/ecu/entity/e_skiresort/ski-resort_schmittenhoehe_n3085-153507-1_raw.jpg',
+          reports: {
+            url: 'https://beachcam.meo.pt/livecams/praia-verde/',
+          },
+          stream: '',
+        },
+      ],
+    },
   ],
 };
