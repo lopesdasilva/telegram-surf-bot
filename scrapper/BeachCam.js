@@ -11,8 +11,6 @@ function getDayForecast($, number) {
   const windSpeed = $(`#dayweek_${number} .values`)[5].children[0].data.trim();
   const windDirection = $(`#dayweek_${number} .values`)[2].children[0].data.trim();
 
-  const seaTemperature = $(`#dayweek_${number} .values`)[4].children[0].data.trim();
-
   return `*${date}: ${waveHeight}m* ${wavePeriod}s ${waveDirection} ${weather} ${weatherTemperature}ºC ${windDirection} ${windSpeed}km/h\n`;
 }
 
