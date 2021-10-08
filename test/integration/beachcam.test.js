@@ -1,28 +1,28 @@
-const { scrapeAndGetMarkup } = require('../../scrapper/BeachCam');
-const { beaches } = require('../../constants/spots');
+const { getFullList, getIMPAReportRequest } = require('../../api/BeachCam');
 
-let weather;
-describe('BeachCam Scrapping', () => {
+let livecams;
+describe('BeachCam API', () => {
   beforeAll(async () => {
-    weather = await scrapeAndGetMarkup(beaches.areas[0].spots[0]);
+    const { Livecams } = await getFullList();
+    livecams = Livecams;
   });
 
 
-  xtest('Suit recommendation is ok', async () => {
-    const { suitRecommendation } = weather.current;
-    await expect(suitRecommendation)
-      .toMatch(RegExp('\\d\\/\\dmm'));
+  test('Title is ok', async () => {
+    expect(livecams[0].Title)
+      .toMatch(RegExp('.+'));
   });
+
 
   test('Sea temperature is ok', async () => {
-    const { seaTemperature } = weather.current;
-    await expect(seaTemperature)
-      .toMatch(RegExp('\\d{1,2},?\\d?'));
+    const { WaterTemperature = '' } = await getIMPAReportRequest(livecams[0].Id);
+    expect(String(WaterTemperature))
+      .toMatch(RegExp('\\d\\.?\\d?'));
   });
 
   test('Wave Height is ok', async () => {
-    const { waveHeight } = weather.current;
-    await expect(waveHeight)
+    const { WaveHeight = '' } = await getIMPAReportRequest(livecams[0].Id);
+    expect(String(WaveHeight))
       .toMatch(RegExp('\\d{1,2},?\\d?'));
   });
 });
