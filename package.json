@@ -1,28 +1,26 @@
 {
-  "name": "telegram",
-  "version": "1.0.0",
+  "name": "surf-beach-cam",
+  "version": "2.0.0",
   "description": "beachcam",
   "main": "beachcam.js",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.3",
-    "dotenv": "^8.2.0",
+    "dotenv": "^10.0.0",
     "node-fetch": "^2.6.1",
-    "telegraf": "^3.33.3",
-    "uuid": "^3.4.0"
+    "telegraf": "^3.33.3"
   },
   "devDependencies": {
-    "eslint": "^6.6.0",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2",
-    "jest": "^26.1.0",
-    "nodemon": "^2.0.2",
-    "codecov": "^3.8.0"
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.2",
+    "jest": "^27.2.5",
+    "nodemon": "^2.0.13",
+    "codecov": "^3.8.3"
   },
   "scripts": {
     "test": "jest --ci --coverage && codecov",
     "start": "node app.js",
     "watch": "nodemon app.js"
   },
-  "author": "",
+  "author": "lopesdasilva",
   "license": "ISC"
 }
