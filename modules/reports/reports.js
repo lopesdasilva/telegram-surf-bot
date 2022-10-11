@@ -1,5 +1,5 @@
 import Telegraf from 'telegraf';
-import buildReport from '../../reports/Beach.js';
+import Beach from '../../surf_report/Beach.js';
 import { getFullList, getIMPAReportRequest } from './api/BeachCam.js';
 import { groupBy } from './utils.js';
 
@@ -7,7 +7,7 @@ const { Markup } = Telegraf;
 
 async function getIpmaReport(spot, ctx) {
   const ipmaReport = await getIMPAReportRequest(spot.Id);
-  const replyMarkup = buildReport({ spot, ipmaReport });
+  const replyMarkup = Beach({ spot, ipmaReport });
   await ctx.reply(
     replyMarkup,
     { parse_mode: 'Markdown' },

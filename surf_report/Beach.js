@@ -1,6 +1,6 @@
 import { getEmoji } from '../modules/reports/utils.js';
 
-function buildReport({ spot, ipmaReport }) {
+function Beach({ spot, ipmaReport }) {
   const {
     WebCamSreamerIos, Title, CondicaoSurf, CondicaoPraia,
   } = spot;
@@ -52,4 +52,4 @@ function buildReport({ spot, ipmaReport }) {
             `;
 }
 
-export default buildReport;
+export default Beach;
