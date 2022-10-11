@@ -1,4 +1,4 @@
-module.exports = {
+export const icons = {
   'clear-day': '☀️',
   'clear-night': '🌙',
   'partly-cloudy-day': '🌤',
@@ -10,3 +10,4 @@ module.exports = {
   wind: '💨',
   fog: '🌫',
 };
+
