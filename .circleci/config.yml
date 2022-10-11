@@ -7,7 +7,6 @@ workflows:
     jobs:
       - node/run:
           npm-run: test
-          test-results-path: "./reports/"
   nightly:
     triggers:
       - schedule:
