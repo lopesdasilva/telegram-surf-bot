@@ -1,11 +1,12 @@
 version: 2.1
 orbs:
-  node: circleci/node@3.0.0
+  node: circleci/node@5.0.3
 workflows:
   version: 2
   commit:
     jobs:
-      - node/test
+      - node/run:
+          npm-run: test
   nightly:
     triggers:
       - schedule:
