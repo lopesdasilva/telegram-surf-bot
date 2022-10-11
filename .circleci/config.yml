@@ -19,4 +19,4 @@ workflows:
                 - master
                 - beta
     jobs:
-      - node/test
+      - node/run
