@@ -1,27 +1,17 @@
-require('dotenv').config();
-const Telegraf = require('telegraf');
-const commands = require('./commands');
+import * as dotenv from 'dotenv';
+import { Telegraf } from 'telegraf';
+import reports from './modules/reports/reports.js';
+import { opensource } from './modules/opensource/opensource.js';
 
-const { URL, PORT = '5000', BOT_TOKEN } = process.env;
+dotenv.config();
+
+const {
+  BOT_TOKEN,
+} = process.env;
+
 const bot = new Telegraf(BOT_TOKEN);
 
-Object.values(commands).map((command) => command(bot));
-console.log(URL);
-console.log(PORT);
+reports(bot);
+opensource(bot);
 
-
-bot.on('callback_query', async ({ update, deleteMessage }, next) => {
-  await deleteMessage(update.callback_query.message.message_id);
-  next();
-});
-
-if (URL) {
-  bot.launch({
-    webhook: {
-      domain: URL,
-      port: PORT,
-    },
-  });
-} else {
-  bot.launch();
-}
+bot.launch();

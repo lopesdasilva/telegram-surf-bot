@@ -1,4 +1,4 @@
-const { getEmoji } = require('../utils/utils');
+import { getEmoji } from '../modules/reports/utils.js';
 
 function buildReport({ spot, ipmaReport }) {
   const {
@@ -52,4 +52,4 @@ function buildReport({ spot, ipmaReport }) {
             `;
 }
 
-exports.BeachReport = buildReport;
+export default buildReport;

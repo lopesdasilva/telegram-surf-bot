@@ -1,5 +1,4 @@
-
-function getEmoji(color) {
+export function getEmoji(color) {
   switch (color.Id) {
     case 0:
       return '🟢';
@@ -12,12 +11,9 @@ function getEmoji(color) {
   }
 }
 
-function groupBy(arr, property) {
+export function groupBy(arr, property) {
   return arr.reduce((acc, cur) => {
     acc[cur[property]] = [...acc[cur[property]] || [], cur];
     return acc;
   }, {});
 }
-
-exports.getEmoji = getEmoji;
-exports.groupBy = groupBy;
