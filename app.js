@@ -11,6 +11,11 @@ const {
 
 const bot = new Telegraf(BOT_TOKEN);
 
+bot.on('callback_query', async (ctx, next) => {
+  await ctx.deleteMessage(ctx.update.callback_query.message.message_id);
+  return next();
+});
+
 reports(bot);
 opensource(bot);
 
