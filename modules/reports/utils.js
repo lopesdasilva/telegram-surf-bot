@@ -1,4 +1,4 @@
-export function getEmoji(color) {
+export function getEmoji(color = {}) {
   switch (color.Id) {
     case 0:
       return '🟢';
