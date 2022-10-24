@@ -3,7 +3,7 @@ orbs:
   node: circleci/node@5.0.3
 workflows:
   version: 2
-  commit:
+  test:
     jobs:
       - node/run:
           npm-run: test
@@ -17,4 +17,4 @@ workflows:
                 - master
                 - beta
     jobs:
-      - node/run
+      - test
