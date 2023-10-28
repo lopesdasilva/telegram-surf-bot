@@ -28,5 +28,3 @@ If you completed the previous steps successfully, you should be able to run the 
 ```sh
 npm start
 ```
-
-Have fun, caroxo.
